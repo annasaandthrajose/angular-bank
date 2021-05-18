@@ -9,7 +9,7 @@ export class LoginComponent implements OnInit {
 
   constructor() { }
 aim="Your Perfect Bankig Partner"
-accno="Account Number Please"
+acno="Account Number Please"
 pswd="";
 
 accountDetails:any={
@@ -26,19 +26,12 @@ accountDetails:any={
 
   ngOnInit(): void {
   }
-  accchange(event:any){
-    this.accno=event.target.value;
-    console.log(this.accno);
-    
-  }
-  pswdchange(event:any){
-    this.pswd=event.target.value;
-    console.log(this.pswd);
-    
-  }
+  
   login()
   {
-    var acno=this.accno;
+    var acno=this.acno;
+    console.log(acno);
+    
     var pswd=this.pswd;
     let users=this.accountDetails
     if(acno in users)

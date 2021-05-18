@@ -8,12 +8,12 @@
     <form>
         <div class="mb-3">
           <label for="acno" class="form-label">Account number</label>
-          <input type="text"  [value]="accno" (change)="accchange($event)" class="form-control" id="acno" aria-describedby="emailHelp">
+          <input type="text"  [value]="acno" [(ngModel)]="acno" class="form-control" name="ac"id="acno" aria-describedby="emailHelp">
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
         <div class="mb-3">
           <label for="pwd" class="form-label">Password</label>
-          <input type="password" (change)="pswdchange($event)" class="form-control" id="pwd">
+          <input type="password" [(ngModel)]="pswd" name="ps"class="form-control" id="pwd">
         </div>
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
