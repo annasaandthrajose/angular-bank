@@ -51,6 +51,8 @@ accountDetails:any={
     }
   }
 
-
+register(){
+  this.router.navigateByUrl("register")
+}
 
 }
