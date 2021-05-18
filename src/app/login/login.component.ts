@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 aim="Your Perfect Bankig Partner"
 acno="Account Number Please"
 pswd="";
@@ -39,6 +40,7 @@ accountDetails:any={
       if(pswd==users[acno]["password"])
       {
         alert("login sucessful")
+        this.router.navigateByUrl("dashboard")
       }
       else{
         alert("incorrect password")
