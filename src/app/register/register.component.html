@@ -5,7 +5,7 @@
         <h5>Register Form</h5>
         <div class="col-4"></div>
     </div>
-    <form>
+    <form (ngSubmit)="register()">
         <div class="mb-3">
             <label for="unmae" class="form-label">User Name</label>
             <input type="text"  [value]="uname" [(ngModel)]="uname" class="form-control" name="un"id="uname" aria-describedby="emailHelp">
@@ -25,7 +25,8 @@
           <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
         
-        <button type="button" (click)="register()" class="btn btn-primary">Create New Account</button>
+        <button type="submit"  class="btn btn-primary">Register</button>
+        <a routerLink="">Login</a>
       </form>
 
 </div>

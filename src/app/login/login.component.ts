@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -8,19 +9,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,private dataService:DataService) { }
 aim="Your Perfect Bankig Partner"
 acno="Account Number Please"
 pswd="";
 
-accountDetails:any={
-  1000:{acno:1000,name:"userone",balance:50000,password:"user1"},
-  1001:{acno:1002,name:"usertwo",balance:5000,password:"user2"},
-  1002:{acno:1003,name:"userthree",balance:10000,password:"user3"},
-  1003:{acno:1004,name:"userfour",balance:6000,password:"user4"}
-  
-
-  }
 
 
 
@@ -34,7 +27,7 @@ accountDetails:any={
     console.log(acno);
     
     var pswd=this.pswd;
-    let users=this.accountDetails
+    let users=this.dataService.accountDetails
     if(acno in users)
     {
       if(pswd==users[acno]["password"])

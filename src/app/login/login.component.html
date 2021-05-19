@@ -5,7 +5,7 @@
         <h5>{{aim}}</h5>
         <div class="col-4"></div>
     </div>
-    <form>
+    <form (ngSubmit)="login()">
         <div class="mb-3">
           <label for="acno" class="form-label">Account number</label>
           <input type="text"  [value]="acno" [(ngModel)]="acno" class="form-control" name="ac"id="acno" aria-describedby="emailHelp">
@@ -19,7 +19,7 @@
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
           <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
-        <button type="button" (click)="login()" class="btn btn-primary">Submit</button>
+        <button type="submit"  class="btn btn-primary">Submit</button>
         <button type="button" (click)="register()" class="btn btn-primary">Create New Account</button>
       </form>
 
