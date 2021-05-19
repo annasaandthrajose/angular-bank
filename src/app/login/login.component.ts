@@ -27,20 +27,11 @@ pswd="";
     console.log(acno);
     
     var pswd=this.pswd;
-    let users=this.dataService.accountDetails
-    if(acno in users)
+    const result=this.dataService.login(acno,pswd)
+    if(result)
     {
-      if(pswd==users[acno]["password"])
-      {
-        alert("login sucessful")
+      alert("login sucessful")
         this.router.navigateByUrl("dashboard")
-      }
-      else{
-        alert("incorrect password")
-      }
-    }
-    else{
-      alert("invalid account")
     }
   }
 

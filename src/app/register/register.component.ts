@@ -21,20 +21,14 @@ register()
   var uname=this.uname;
   var acno=this.acno;
   var pswd=this.pswd;
-  let user=this.dataService.accountDetails;
-  if(acno in user)
-  {
-    alert("User Exists...Please Login")
+  const result=this.dataService.register(uname,acno,pswd)
+  if(result){
+    alert("Registration Sucessful");
+
+  this.router.navigateByUrl("")
   }
   else{
-    user[acno]={
-      acno,
-      username:uname,
-     password:pswd,
-      balance:0
-    }
-    alert("Registration Sucessful");
-this.router.navigateByUrl("")
+    alert("User Exists...Please Login")
   }
 }
 }
