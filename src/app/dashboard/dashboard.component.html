@@ -6,24 +6,24 @@
         <div class="col-4"><h4>Deposit Form</h4></div>
         <div class="col-4"></div>
     </div>
-    <form action="">
+    <form (ngSubmit)="deposit()">
         <div class="mb-3">
           <label for="acno" class="form-label">Account number</label>
-          <input type="text" class="form-control" id="acno" aria-describedby="emailHelp">
+          <input type="text" class="form-control" name="acn" [(ngModel)]="dAccno"  id="acno" aria-describedby="emailHelp">
           
         </div>
         <div class="mb-3">
           <label for="pwd" class="form-label">Password</label>
-          <input type="password" class="form-control" id="pwd">
+          <input type="password" class="form-control" name="ps" [(ngModel)]="dPswd" id="pwd">
         </div>
         <div class="mb-3">
             <label for="pwd" class="form-label">Amount</label>
-            <input type="text" class="form-control"  id="amt">
+            <input type="text" class="form-control" name="am" [(ngModel)]="dAmount" id="amt">
           </div>
         
         
 
-        <button type="button"  class="btn btn-primary">Deposit</button>
+        <button type="submit"  class="btn btn-primary">Deposit</button>
         
       </form>
 
@@ -34,24 +34,24 @@
         <div class="col-4"><h4>Withdraw Form <Form></Form></h4></div>
         <div class="col-4"></div>
     </div>
-<form action="">
+<form (ngSubmit)="withdraw()">
     <div class="mb-3">
       <label for="acno" class="form-label">Account number</label>
-      <input type="text" class="form-control" id="acno" aria-describedby="emailHelp">
+      <input type="text" class="form-control"[(ngModel)]="wAccno" name="da" id="acno" aria-describedby="emailHelp">
       
     </div>
     <div class="mb-3">
       <label for="pwd" class="form-label">Password</label>
-      <input type="password" class="form-control" id="pwd">
+      <input type="password" class="form-control" [(ngModel)]="wPswd" name="dp" id="pwd">
     </div>
     <div class="mb-3">
         <label for="pwd" class="form-label">Amount</label>
-        <input type="text" class="form-control" id="amt">
+        <input type="text" class="form-control"[(ngModel)]="wAmount" name="da" id="amt">
       </div>
     
     
 
-    <button type="button"  class="btn btn-primary">Withdrawal</button>
+    <button type="submit"  class="btn btn-primary">Withdrawal</button>
     
   </form>
   </div>
