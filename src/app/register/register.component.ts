@@ -26,11 +26,11 @@ registerForm=this.fb.group({
   }
 register()
 {
-  console.log(this.registerForm.get('uname')?.errors);
-  if(this.registerForm.get('uname')?.errors)
-  {
-    alert("Username Required")
-  }
+  //console.log(this.registerForm.get('uname')?.errors);
+  //if(this.registerForm.get('uname')?.errors)
+  //{
+   // alert("Username Required")
+  //}
   
   if(this.registerForm.valid)
   {

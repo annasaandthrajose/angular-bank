@@ -9,7 +9,7 @@
         <div class="mb-3">
             <label for="unmae" class="form-label">User Name</label>
             <input type="text"  [value]="uname" formControlName="uname" class="form-control" name="un"id="uname" aria-describedby="emailHelp">
-            <div class="error">Invalid Username
+            <div *ngIf="(registerForm.get('uname')?.touched || registerForm.get('uname')?.dirty) && registerForm.get('uname')?.errors" class="error">Invalid Username
 
             </div>
           </div>
@@ -17,10 +17,16 @@
           <label for="acno" class="form-label">Account number</label>
           <input type="text"  [value]="acno" formControlName="acno" class="form-control" name="ac"id="acno" aria-describedby="emailHelp">
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <div *ngIf="(registerForm.get('acno')?.touched || registerForm.get('acno')?.dirty) && registerForm.get('acno')?.errors" class="error">Invalid Username
+
+          </div>
         </div>
         <div class="mb-3">
           <label for="pwd" class="form-label">Password</label>
           <input type="password" formControlName="pswd" name="ps"class="form-control" id="pwd">
+          <div *ngIf="(registerForm.get('pswd')?.touched || registerForm.get('pswd')?.dirty) && registerForm.get('pswd')?.errors" class="error">Invalid Username
+
+          </div>
         </div>
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
