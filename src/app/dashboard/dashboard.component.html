@@ -6,19 +6,22 @@
         <div class="col-4"><h4>Deposit Form</h4></div>
         <div class="col-4"></div>
     </div>
-    <form (ngSubmit)="deposit()">
+    <form [formGroup]="depositForm" (ngSubmit)="deposit()">
         <div class="mb-3">
           <label for="acno" class="form-label">Account number</label>
-          <input type="text" class="form-control" name="acn" [(ngModel)]="dAccno"  id="acno" aria-describedby="emailHelp">
-          
+          <input type="text" class="form-control" name="acn" formControlName="dAccno"  id="acno" aria-describedby="emailHelp">
+          <div *ngIf="(depositForm.get('dAccno')?.touched || depositForm.get('dAccno')?.dirty) && depositForm.get('dAccno')?.errors" class="error">Invalid Account Number
+          </div>
         </div>
         <div class="mb-3">
           <label for="pwd" class="form-label">Password</label>
-          <input type="password" class="form-control" name="ps" [(ngModel)]="dPswd" id="pwd">
+          <input type="password" class="form-control" name="ps" formControlName="dPswd" id="pwd">
+          <div *ngIf="(depositForm.get('dPswd')?.touched || depositForm.get('dPswd')?.dirty) && depositForm.get('dPswd')?.errors" class="error">Invalid Password</div>
         </div>
         <div class="mb-3">
             <label for="pwd" class="form-label">Amount</label>
-            <input type="text" class="form-control" name="am" [(ngModel)]="dAmount" id="amt">
+            <input type="text" class="form-control" name="am" formControlName="dAmount" id="amt">
+            <div *ngIf="(depositForm.get('dAmount')?.touched || depositForm.get('dAmount')?.dirty) && depositForm.get('dAmount')?.errors"class="error">Invalid Amount</div>
           </div>
         
         
@@ -34,19 +37,24 @@
         <div class="col-4"><h4>Withdraw Form <Form></Form></h4></div>
         <div class="col-4"></div>
     </div>
-<form (ngSubmit)="withdraw()">
+<form [formGroup]="withdrawForm" (ngSubmit)="withdraw()">
     <div class="mb-3">
       <label for="acno" class="form-label">Account number</label>
-      <input type="text" class="form-control"[(ngModel)]="wAccno" name="da" id="acno" aria-describedby="emailHelp">
-      
+      <input type="text" class="form-control"formControlName="wAccno" name="da" id="acno" aria-describedby="emailHelp">
+      <div *ngIf="(withdrawForm.get('wAccno')?.touched || withdrawForm.get('wAccno')?.dirty) && withdrawForm.get('wAccno')?.errors" class="error">Invalid Account Number
+      </div>
     </div>
     <div class="mb-3">
       <label for="pwd" class="form-label">Password</label>
-      <input type="password" class="form-control" [(ngModel)]="wPswd" name="dp" id="pwd">
+      <input type="password" class="form-control" formControlName="wPswd" name="dp" id="pwd">
+      <div *ngIf="(withdrawForm.get('wPswd')?.touched || withdrawForm.get('wPswd')?.dirty) && withdrawForm.get('wPswd')?.errors" class="error">Invalid Password
+      </div>
     </div>
     <div class="mb-3">
         <label for="pwd" class="form-label">Amount</label>
-        <input type="text" class="form-control"[(ngModel)]="wAmount" name="da" id="amt">
+        <input type="text" class="form-control" formControlName="wAmount" name="da" id="amt">
+        <div *ngIf="(withdrawForm.get('wAmount')?.touched || withdrawForm.get('wAmount')?.dirty) && withdrawForm.get('wAmount')?.errors" class="error">Invalid Amount
+        </div>
       </div>
     
     
