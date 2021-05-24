@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class DataService {
+  currentUser= "";
   accountDetails:any={
     1000:{acno:1000,name:"userone",balance:50000,password:"user1"},
     1001:{acno:1002,name:"usertwo",balance:5000,password:"user2"},
@@ -14,8 +15,25 @@ export class DataService {
   
     }
   
-  constructor(private router:Router) { }
+  constructor(private router:Router) { 
+    this.getDetails();
+  }
+  saveDetails(){
+    localStorage.setItem("accountDetails",JSON.stringify(this.accountDetails))
+    if(this.currentUser){
+    localStorage.setItem("currentUser",JSON.stringify(this.currentUser))
+  }
+  }
+getDetails()
+{
+  if(localStorage.getItem("accountDetails")){
+  this.accountDetails=JSON.parse(localStorage.getItem("accountDetails")||'');
+  }
+  if(localStorage.getItem("currentUser")){
+  this.currentUser=JSON.parse(localStorage.getItem("currentUser")||'');
+  }
 
+}
   register(uname:any,acno:any,pswd:any){
     let user=this.accountDetails;
     if(acno in user)
@@ -30,6 +48,7 @@ export class DataService {
        password:pswd,
         balance:0
       }
+      this.saveDetails();
       return true;
       
     }
@@ -41,6 +60,8 @@ export class DataService {
     {
       if(pswd==users[acno]["password"])
       {
+        this.currentUser=users[acno]["username"]
+        this.saveDetails()
         return true;
         
       }
@@ -60,9 +81,10 @@ export class DataService {
     let user=this.accountDetails;
     if(acno in user)
     {
-      if(pswd=user[acno]["password"])
+      if(pswd==user[acno]["password"])
       {
         user[acno]["balance"]+=amount;
+        this.saveDetails();
         return user[acno]["balance"]
       }
       else{
@@ -80,10 +102,11 @@ export class DataService {
     let user=this.accountDetails;
     if(acno in user)
     {
-      if(pswd=user[acno]["password"])
+      if(pswd==user[acno]["password"])
       {
         if(user[acno]["balance"]>amount){
           user[acno]["balance"]-=amount;
+          this.saveDetails();
         return user[acno]["balance"]
         }
        else{
