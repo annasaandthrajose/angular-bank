@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -14,8 +15,10 @@ export class DataService {
     
   
     }
+  constructor(private http:HttpClient){
+
   
-  constructor(private router:Router) { 
+  //constructor(private router:Router) { 
     this.getDetails();
   }
   saveDetails(){
@@ -35,45 +38,57 @@ getDetails()
 
 }
   register(uname:any,acno:any,pswd:any){
-    let user=this.accountDetails;
-    if(acno in user)
-    {
-      return false;
-      
+    const data={
+      uname,
+      acno,
+      pswd
     }
-    else{
-      user[acno]={
-        acno,
-        username:uname,
-       password:pswd,
-        balance:0
-      }
-      this.saveDetails();
-      return true;
+    return this.http.post("http://localhost:3000/register",data)
+    //let user=this.accountDetails;
+  //   if(acno in user)
+  //   {
+  //     return false;
       
-    }
+  //   }
+  //   else{
+  //     user[acno]={
+  //       acno,
+  //       username:uname,
+  //      password:pswd,
+  //       balance:0
+  //     }
+  //     this.saveDetails();
+  //     return true;
+      
+  //   }
   }
   login(acno:any,pswd:any)
   {
-    let users=this.accountDetails
-    if(acno in users)
-    {
-      if(pswd==users[acno]["password"])
-      {
-        this.currentUser=users[acno]["username"]
-        this.saveDetails()
-        return true;
+    const data={
+      
+      acno,
+      pswd
+    }
+    return this.http.post("http://localhost:3000/login",data)
+    //let users=this.accountDetails
+    //if(acno in users)
+    // {
+    //   if(pswd==users[acno]["password"])
+    //   {
+    //     this.currentUser=users[acno]["username"]
+    //     this.saveDetails()
+    //     return true;
         
-      }
-      else{
-        alert("incorrect password")
-        return false;
-      }
-    }
-    else{
-      alert("invalid account")
-      return false;
-    }
+    //   }
+    //   else{
+    //     alert("incorrect password")
+    //     return false;
+    //   }
+    // }
+    // else{
+    //   alert("invalid account")
+    //   return false;
+    // }
   
   }
   deposit(acno:any,pswd:any,amt:any){

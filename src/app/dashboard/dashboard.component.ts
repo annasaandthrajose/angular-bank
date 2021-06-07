@@ -26,10 +26,10 @@ withdrawForm=this.fb.group({
   wAmount:['',[Validators.required,Validators.pattern('[0-9]*')]]
 })
 
-user=this.dataService.currentUser;
+user:any
 
   constructor(private dataService:DataService,private fb:FormBuilder) { 
-    
+    this.user=localStorage.getItem("name")
   }
 
   ngOnInit(): void {

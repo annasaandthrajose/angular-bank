@@ -34,13 +34,25 @@ loginForm=this.fb.group({
       var acno=this.loginForm.value.acno;
     var pswd=this.loginForm.value.pswd;
   //login function
-    const result=this.dataService.login(acno,pswd)
-    if(result)
-    {
-      alert("login sucessful")
+    this.dataService.login(acno,pswd)
+    .subscribe((result:any)=> {
+      if (result) {
+        alert(result.message);
+localStorage.setItem("name",result.name);
         this.router.navigateByUrl("dashboard")
+
+      }
+    },
+      (result) => {
+        alert(result.error.message)
+      })
     }
-    }
+    // if(result)
+    // {
+    //   alert("login sucessful")
+    //     this.router.navigateByUrl("dashboard")
+    // }
+    // }
     //var acno=this.loginForm.value.acno;
    // var pswd=this.loginForm.value.pswd;
     //var acno=this.acno;
