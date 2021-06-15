@@ -7,13 +7,18 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
+import { DeletecomponentComponent } from './deletecomponent/deletecomponent.component';
+import { HighlightDirective } from './directives/highlight.directive';
+//import { HighlightDirective } from './directive/highlight.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    RegisterComponent
+    RegisterComponent,
+    DeletecomponentComponent,
+    HighlightDirective
     
   ],
   imports: [

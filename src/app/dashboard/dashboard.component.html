@@ -1,27 +1,30 @@
 
 <div class="container">
-    <h1>Welcome {{user}}</h1>
+    <h1 appHighlight>Welcome {{user}}</h1>
+    <h4>Login Details(unformatted):{{lDate}}</h4>
+    <h4>Login Details(formatted):{{lDate | date:'medium'}}</h4>
+    <h4>Login Details(formatted):{{lDate | date|uppercase}}</h4>
     <div class="row">
         <div class="col-4"></div>
         <div class="col-4"><h4>Deposit Form</h4></div>
         <div class="col-4"></div>
     </div>
-    <form [formGroup]="depositForm" (ngSubmit)="deposit()">
+    <form [ngClass]="acno ?'style1':'' "[formGroup]="depositForm" (ngSubmit)="deposit()">
         <div class="mb-3">
           <label for="acno" class="form-label">Account number</label>
-          <input type="text" class="form-control" name="acn" formControlName="dAccno"  id="acno" aria-describedby="emailHelp">
-          <div *ngIf="(depositForm.get('dAccno')?.touched || depositForm.get('dAccno')?.dirty) && depositForm.get('dAccno')?.errors" class="error">Invalid Account Number
+          <input type="text" class="form-control" name="acn" formControlName="acno"  id="acno" aria-describedby="emailHelp">
+          <div *ngIf="(depositForm.get('acno')?.touched || depositForm.get('acno')?.dirty) && depositForm.get('acno')?.errors" class="error">Invalid Account Number
           </div>
         </div>
         <div class="mb-3">
           <label for="pwd" class="form-label">Password</label>
-          <input type="password" class="form-control" name="ps" formControlName="dPswd" id="pwd">
-          <div *ngIf="(depositForm.get('dPswd')?.touched || depositForm.get('dPswd')?.dirty) && depositForm.get('dPswd')?.errors" class="error">Invalid Password</div>
+          <input type="password" class="form-control" name="ps" formControlName="pswd" id="pwd">
+          <div *ngIf="(depositForm.get('pswd')?.touched || depositForm.get('pswd')?.dirty) && depositForm.get('pswd')?.errors" class="error">Invalid Password</div>
         </div>
         <div class="mb-3">
             <label for="pwd" class="form-label">Amount</label>
-            <input type="text" class="form-control" name="am" formControlName="dAmount" id="amt">
-            <div *ngIf="(depositForm.get('dAmount')?.touched || depositForm.get('dAmount')?.dirty) && depositForm.get('dAmount')?.errors"class="error">Invalid Amount</div>
+            <input type="text" class="form-control" name="am" formControlName="amount" id="amt">
+            <div *ngIf="(depositForm.get('amount')?.touched || depositForm.get('amount')?.dirty) && depositForm.get('amount')?.errors"class="error">Invalid Amount</div>
           </div>
         
         
@@ -63,3 +66,9 @@
     
   </form>
   </div>
+  <app-deletecomponent (onDelete)="onDelete($event)" (onCancel)="onCancel()" [item]="acno"></app-deletecomponent>
+  <br><br>
+  <button type="submit" class="btn btn-primary" (click)="deleteAcc()">Delete Account</button>
+  
+
+  

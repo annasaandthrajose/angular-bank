@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -8,16 +9,16 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-//dAccno="";
-dPswd="";
-dAmount="";
-wAccno="";
-wPswd="";
-wAmount=""
+//dacno="";
+//dpswd="";
+//damount="";
+//wAccno="";
+//wPswd="";
+//wAmount=""
 depositForm=this.fb.group({
-  dAccno:['',[Validators.required,Validators.minLength(4),Validators.pattern('[0-9]*')]],
-  dPswd:['',[Validators.required,Validators.pattern('[a-zA-Z0-9]*')]],
-  dAmount:['',[Validators.required,Validators.pattern('[0-9]*')]]
+  acno:['',[Validators.required,Validators.minLength(4),Validators.pattern('[0-9]*')]],
+  pswd:['',[Validators.required,Validators.pattern('[a-zA-Z0-9]*')]],
+  amount:['',[Validators.required,Validators.pattern('[0-9]*')]]
 
 })
 withdrawForm=this.fb.group({
@@ -26,9 +27,11 @@ withdrawForm=this.fb.group({
   wAmount:['',[Validators.required,Validators.pattern('[0-9]*')]]
 })
 
-user:any
+user:any;
+acno:any;
+lDate:Date=new Date()
 
-  constructor(private dataService:DataService,private fb:FormBuilder) { 
+  constructor(private dataService:DataService,private fb:FormBuilder,private router:Router) { 
     this.user=localStorage.getItem("name")
   }
 
@@ -36,14 +39,25 @@ user:any
   }
 deposit(){
   if(this.depositForm.valid){//call deposit function line 48 to 55
-    var accno=this.depositForm.value.dAccno;
-  var pswd=this.depositForm.value.dPswd
-  var amount=this.depositForm.value.dAmount;
-  const result=this.dataService.deposit(accno,pswd,amount)
-  if(result)
-  {
-    alert("the given amount is"+amount+"credited and new balance is"+result)
-  }
+    var accno=this.depositForm.value.acno;
+  var pswd=this.depositForm.value.pswd
+  var amount=this.depositForm.value.amount;
+  this.dataService.deposit(accno,pswd,amount)
+  .subscribe((result:any)=> {
+    if (result) {
+      alert(result.message);
+
+      //this.router.navigateByUrl("") //no need to navigate
+
+    }
+  },
+    (result) => {
+      alert(result.error.message)
+    })
+ // if(result)
+  //{
+    //alert("the given amount is"+amount+"credited and new balance is"+result)
+ // }
   }
   //alert("Amount Credited")
   //var accno=this.dAccno;
@@ -69,12 +83,24 @@ withdraw(){
   var pswd=this.withdrawForm.value.wPswd;
   var amount=this.withdrawForm.value.wAmount;
 
-  const result=this.dataService.withdraw(accno,pswd,amount)
-  if(result)
-  {
-    alert("the given amount is"+amount+"debited and new balance is"+result)
+  this.dataService.withdraw(accno,pswd,amount)
+  .subscribe((result:any)=> {
+    if (result) {
+      alert(result.message);
+
+      //this.router.navigateByUrl("") //no need to navigate
+
+    }
+  },
+    (result:any) => {
+      alert(result.error.message)
+    })
   }
-}
+//   if(result)
+//   {
+//     alert("the given amount is"+amount+"debited and new balance is"+result)
+//   }
+// }
 else{
   alert("Invalid Form")
 }
@@ -92,4 +118,23 @@ else{
     //alert("the given amount is"+amount+"debited and new balance is"+result)
   //}
 //}
+onDelete(event:any){
+this.dataService.deleteAccDetails(event)
+.subscribe((result:any)=>{
+  if(result){
+alert(result.message)
+this.router.navigateByUrl("")
+  }
+},
+(result:any)=>{
+  alert(result.error.message)
+})
+}
+onCancel(){
+  this.acno=""
+}
+deleteAcc(){
+  this.acno=localStorage.getItem("acno")
+}
+
 }
